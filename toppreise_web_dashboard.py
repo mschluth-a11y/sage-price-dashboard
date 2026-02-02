@@ -157,7 +157,7 @@ def write_json(data: Dict[str, Dict[str, str]], path: str = "prices.json"):
         json.dump(payload, f, ensure_ascii=False, indent=2)
 
 def render_rows_normal(data: Dict[str, Dict[str, str]]) -> str:
-    """Normale Seite: Karte mit klickbaren Links (Button + URL)."""
+    """Normale Seite: gesamte Karte ist der Link (kein innerer Link)."""
     rows = []
     for model, d in data.items():
         price = d.get("price_chf")
@@ -165,14 +165,11 @@ def render_rows_normal(data: Dict[str, Dict[str, str]]) -> str:
         price_txt = f"ab CHF {price}".replace(",", "'") if price else "—"
         rows.append(
             f"""
-            <div class="card">
+            {url}
               <h3 class="model">{model}</h3>
               <p class="price">{price_txt}</p>
-              <div class="actions">
-                {url}Zur Angebotsseite</a>
-              </div>
               <div class="url">{url}</div>
-            </div>
+            </a>
             """
         )
     return "\n".join(rows)
