@@ -2,139 +2,58 @@
 <html lang="de">
 <head>
   <meta charset="utf-8" />
-  <meta 
-    name="viewport" 
-    content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Sage Preis-Dashboard (Widget)</title>
-
-  <!-- Optional: Auto-Refresh alle 30 Minuten (Wachete/Widget kann zusätzlich aktualisieren)
-       Wenn du KEIN Auto-Refresh willst, diese Zeile entfernen. -->
-  <meta http-equiv="refresh" content="1800">
-
-  <!-- Cache vermeiden, damit Widgets die neuste Version ziehen -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sage Preis-Dashboard</title>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-
   <style>
-    :root {
-      /* Lesbarkeit im Widget erhöhen */
-      --bg: #0d1117;        /* dunkles Theme für AMOLED & Kontrast */
-      --card: #161b22;      /* Karten-Hintergrund */
-      --text: #e6edf3;      /* Primärtext */
-      --muted: #9aa4af;     /* Sekundärtext */
-      --accent: #2ea043;    /* Grün für Preise */
-      --link: #2f81f7;      /* Link-Farbe */
-      --radius: 12px;
-      --pad: 10px;
-      --gap: 8px;
-      --font: 16px;         /* Basis-Schriftgröße für Widget */
-      --price: 20px;        /* Preisgröße im Widget */
+    :root{
+      --bg:#0d1117; --card:#161b22; --text:#e6edf3; --muted:#9aa4af; --accent:#2ea043; --link:#2f81f7;
+      --radius:12px; --pad:12px; --gap:10px; --fs:17px; --fs-price:22px;
     }
-
-    /* „Normal“-Layout (falls du Seite im Browser öffnest) */
-    @media (min-width: 500px) {
-      :root { --font: 17px; --price: 22px; }
-      .wrap { max-width: 920px; margin: 0 auto; }
-    }
-
-    html, body {
-      padding: 0; margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      font-size: var(--font);
-      line-height: 1.35;
-    }
-
-    /* kompakter Außenabstand, ideal für Widgets */
-    .wrap {
-      padding: 8px;
-    }
-
-    /* Einspaltiges Grid – Widgets lieben klare Spalten */
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: var(--gap);
-    }
-
-    /* Karte ist der Touch-Zielbereich (Link umschließt alles) */
-    .card {
-      display: block;
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: var(--pad);
-      text-decoration: none;
-      color: inherit;
-      box-shadow: 0 1px 6px rgba(0,0,0,.35);
-      border: 1px solid rgba(255,255,255,.06);
-    }
-    .card:active { filter: brightness(0.95); }
-
-    .model {
-      font-weight: 600;
-      margin: 0 0 6px 0;
-      letter-spacing: .1px;
-    }
-    .price {
-      font-size: var(--price);
-      color: var(--accent);
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    .meta {
-      color: var(--muted);
-      font-size: 0.92em;
-    }
-
-    /* Kopfzeile für größere Screens; in Widgets sehr kompakt halten */
-    .header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin: 4px 2px 8px 2px;
-    }
-    .title {
-      font-size: 14px; color: var(--muted);
-      letter-spacing: .2px;
-    }
-    .updated {
-      font-size: 12px; color: var(--muted);
-    }
-
-    /* Kompaktmodus: reduziert Abstände/fett */
-    .compact .card { padding: 8px; }
-    .compact .model { margin-bottom: 4px; }
-    .compact .price { font-size: calc(var(--price) - 2px); }
-    .compact .wrap { padding: 6px; }
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
+      font:normal var(--fs)/1.45 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+    .wrap{max-width:920px;margin:0 auto;padding:16px}
+    .header{display:flex;align-items:center;justify-content:space-between;margin:2px 0 12px}
+    .title{font-weight:600}
+    .updated{font-size:13px;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--gap)}
+    .card{display:block;background:var(--card);border-radius:var(--radius);padding:var(--pad);
+      text-decoration:none;color:inherit;border:1px solid rgba(255,255,255,.06);box-shadow:0 1px 8px rgba(0,0,0,.35)}
+    .card:focus,.card:hover{outline:none;box-shadow:0 0 0 2px rgba(47,129,247,.6)}
+    .model{font-weight:700;margin:0 0 8px}
+    .price{font-size:var(--fs-price);font-weight:800;color:var(--accent);margin:0 0 6px}
+    .link{font-size:14px;color:var(--link);text-decoration:underline;word-break:break-all}
+    .muted{color:var(--muted);font-size:13px}
   </style>
 </head>
-<body class="compact">
+<body>
   <div class="wrap">
     <div class="header">
       <div class="title">Sage Preis-Dashboard</div>
-      <div class="updated">Aktualisiert: 02.02.2026 15:20</div>
+      <div class="updated">Aktualisiert: 02.02.2026 15:38</div>
     </div>
-
     <div class="grid">
       
         https://www.toppreise.ch/preisvergleich/Siebtraegermaschinen/SAGE-The-Barista-Touch-Impress-Cold-Brushed-Edelstahl-p816790
-          <div class="m">Sage Barista Touch Impress</div>
-          <div class="p">ab CHF 957.80</div>
-          <div class="s">https://www.toppreise.ch/preisvergleich/Siebtraegermaschinen/SAGE-The-Barista-Touch-Impress-Cold-Brushed-Edelstahl-p816790</div>
+          <div class="model">Sage Barista Touch Impress</div>
+          <div class="price">ab CHF 957.80</div>
+          <div class="link">https://www.toppreise.ch/preisvergleich/Siebtraegermaschinen/SAGE-The-Barista-Touch-Impress-Cold-Brushed-Edelstahl-p816790</div>
         </a>
         
 
         https://www.toppreise.ch/produktserie/The_Barista_Pro-pc-s43919
-          <div class="m">Sage Barista Pro</div>
-          <div class="p">ab CHF 559.00</div>
-          <div class="s">https://www.toppreise.ch/produktserie/The_Barista_Pro-pc-s43919</div>
+          <div class="model">Sage Barista Pro</div>
+          <div class="price">ab CHF 559.00</div>
+          <div class="link">https://www.toppreise.ch/produktserie/The_Barista_Pro-pc-s43919</div>
         </a>
         
 
         https://www.toppreise.ch/produktserie/The_Barista_Touch-pc-s43924
-          <div class="m">Sage Barista Touch</div>
-          <div class="p">ab CHF 699.00</div>
-          <div class="s">https://www.toppreise.ch/produktserie/The_Barista_Touch-pc-s43924</div>
+          <div class="model">Sage Barista Touch</div>
+          <div class="price">ab CHF 699.00</div>
+          <div class="link">https://www.toppreise.ch/produktserie/The_Barista_Touch-pc-s43924</div>
         </a>
         
     </div>
