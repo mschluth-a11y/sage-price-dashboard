@@ -10,22 +10,25 @@
   <style>
     :root{
       --bg:#0d1117; --card:#161b22; --text:#e6edf3; --muted:#9aa4af; --accent:#2ea043; --link:#2f81f7;
-      --radius:12px; --pad:12px; --gap:10px; --fs:17px; --fs-price:22px;
+      --radius:12px; --pad:14px; --gap:12px; --fs:17px; --fs-price:24px;
     }
     html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
-      font:normal var(--fs)/1.45 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
-    .wrap{max-width:920px;margin:0 auto;padding:16px}
-    .header{display:flex;align-items:center;justify-content:space-between;margin:2px 0 12px}
-    .title{font-weight:600}
+      font:normal var(--fs)/1.5 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+    .wrap{max-width:980px;margin:0 auto;padding:18px}
+    .header{display:flex;align-items:center;justify-content:space-between;margin:4px 0 16px}
+    .title{font-weight:700;letter-spacing:.2px}
     .updated{font-size:13px;color:var(--muted)}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--gap)}
-    .card{display:block;background:var(--card);border-radius:var(--radius);padding:var(--pad);
-      text-decoration:none;color:inherit;border:1px solid rgba(255,255,255,.06);box-shadow:0 1px 8px rgba(0,0,0,.35)}
-    .card:focus,.card:hover{outline:none;box-shadow:0 0 0 2px rgba(47,129,247,.6)}
-    .model{font-weight:700;margin:0 0 8px}
-    .price{font-size:var(--fs-price);font-weight:800;color:var(--accent);margin:0 0 6px}
-    .link{font-size:14px;color:var(--link);text-decoration:underline;word-break:break-all}
-    .muted{color:var(--muted);font-size:13px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--gap)}
+
+    .card{background:var(--card);border-radius:var(--radius);padding:var(--pad);
+      border:1px solid rgba(255,255,255,.07);box-shadow:0 2px 10px rgba(0,0,0,.35);
+      display:flex;flex-direction:column;gap:8px}
+    .model{font-weight:700;margin:0}
+    .price{font-size:var(--fs-price);font-weight:800;color:var(--accent);margin:0}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .btn{display:inline-block;background:#1f6feb;color:#fff;text-decoration:none;padding:8px 10px;border-radius:8px;font-size:14px}
+    .btn:hover{filter:brightness(1.05)}
+    .url{font-size:12px;color:var(--muted);word-break:break-all}
   </style>
 </head>
 <body>
@@ -34,6 +37,7 @@
       <div class="title">Sage Preis-Dashboard</div>
       <div class="updated">Aktualisiert: __UPDATED__</div>
     </div>
+
     <div class="grid">
       <!--__ROWS__-->
     </div>
