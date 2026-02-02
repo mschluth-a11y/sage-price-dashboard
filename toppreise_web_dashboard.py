@@ -115,20 +115,30 @@ def write_json(data, path='prices.json'):
     with open(path,'w',encoding='utf-8') as f:
         json.dump(payload,f,ensure_ascii=False,indent=2)
 
-def render_html(data, template='index_template.html', out='index.html'):
-    tpl = open(template,'r',encoding='utf-8').read()
-    rows=[]
-    for model,d in data.items():
-        price=d.get('price_chf'); url=d.get('url')
-        price_txt = f"ab CHF {price}".replace(',',"'") if price else '—'
-        rows.append(f"""
-        <div class=\"card\">
-          <div class=\"model\">{model}</div>
-          <div class=\"price\">{price_txt}</div>
-          <a class=\"link\" href=\"{url}\" target=\"_blank\" rel=\"noopener\">Zur Angebotsseite</a>
-        </div>""")
-    html = tpl.replace("<!--__ROWS__-->","\n".join(rows)).replace("__UPDATED__", datetime.now().strftime("%d.%m.%Y %H:%M"))
-    open(out,'w',encoding='utf-8').write(html)
+def render_html(data: Dict[str, Dict[str, str]], template_path: str, out_path: str):
+    with open(template_path, "r", encoding="utf-8") as f:
+        tpl = f.read()
+    rows = []
+    for model, d in data.items():
+        price = d.get("price_chf")
+        url = d.get("url")
+        price_txt = f"ab CHF {price}".replace(",", "'") if price else "—"
+        # komplette Karte als Link; im Widget nicht klickbar, aber im Browser praktisch
+        row = f"""
+        {url}
+          <div class="m">{model}</div>
+          <div class="p">{price_txt}</div>
+          <div class="s">{url}</div>
+        </a>
+        """
+        rows.append(row)
+    # UPDATED einsetzen
+    from datetime import datetime
+    html = tpl.replace("<!--__ROWS__-->", "\n".join(rows)).replace(
+        "__UPDATED__", datetime.now().strftime("%d.%m.%Y %H:%M")
+    )
+    with open(out_path, "w", encoding="utf-8") as f:
+        f.write(html)
 
 def send_push_if_needed(data,cfg):
     topic = cfg.get('ntfy_topic'); thresholds = cfg.get('thresholds') or DEFAULT_THRESHOLDS
@@ -150,9 +160,26 @@ def send_push_if_needed(data,cfg):
 def generate_once():
     cfg = load_config()
     data = poll_all_products()
+
+    # JSON schreiben
     write_json(data)
-    render_html(data)
-    send_push_if_needed(data,cfg)
+
+    # 1) Normales Dashboard
+    render_html(
+        data,
+        template_path="index_template.html",
+        out_path="index.html",
+    )
+
+    # 2) Kompakte Widget-Ansicht
+    render_html(
+        data,
+        template_path="widget_template.html",  # <--- die neue Datei
+        out_path="widget.html",
+    )
+
+    # Push-Alert (falls Schwellen unterschritten; optional)
+    send_push_if_needed(data, cfg)
 
 def serve_forever(port=8000):
     handler = http.server.SimpleHTTPRequestHandler
