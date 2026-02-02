@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Sage – Widget</title>
+
+  <!-- Optional: sanfter Auto-Refresh (30 Min). Entferne die Zeile, wenn nur das Widget-Intervall genutzt werden soll. -->
+  <meta http-equiv="refresh" content="1800" />
+
+  <!--; --accent:#2ea043;  <!-- Cache vermeiden, damit Widgets die neueste Version holen -->
+      --r:10px; --pad:8px; --gap:6px; --fs:16px; --fs-price:20px;
+    }
+    @media (min-width:500px){ :root{ --fs:17px; --fs-price:22px; } }
+
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      font-size:var(--fs);line-height:1.35;}
+    .wrap{padding:6px;}
+    .head{display:flex;justify-content:space-between;align-items:center;margin:2px 2px 6px;}
+    .t{font-size:13px;color:var(--muted);letter-spacing:.2px}
+    .u{font-size:12px;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:1fr;gap:var(--gap)}
+
+    /* kompakte Karte – gesamte Karte ist Tap-Ziel, aber Widget-Apps erlauben Clicks i.d.R. nur als Gesamttap */
+    .card{display:block;background:var(--card);border-radius:var(--r);padding:var(--pad);
+      color:inherit;text-decoration:none;border:1px solid rgba(255,255,255,.06);
+      box-shadow:0 1px 5px rgba(0,0,0,.35);}
+    .m{font-weight:600;margin:0 0 4px 0}
+    .p{font-size:var(--fs-price);color:var(--accent);font-weight:800;margin:0 0 2px 0}
+    .s{font-size:12px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="head">
+      <div class="t">Sage – Widget</div>
+      <div class="u">Aktualisiert: __UPDATED__</div>
+    </div>
+
+    <div class="grid">
+      <!--__ROWS__-->
+    </div>
+  </div>
+</body>
+</html>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
+  <style>
+    :root{
