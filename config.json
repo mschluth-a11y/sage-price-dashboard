@@ -1,8 +1,0 @@
-{
-  "thresholds": {
-    "Sage Barista Touch Impress": 900.0,
-    "Sage Barista Pro": 500.0,
-    "Sage Barista Touch": 600.0
-  },
-  "ntfy_topic": "michel_sage_alerts_f9v7w2yq"
-}
