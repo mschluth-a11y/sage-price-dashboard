@@ -157,7 +157,6 @@ def write_json(data: Dict[str, Dict[str, str]], path: str = "prices.json"):
         json.dump(payload, f, ensure_ascii=False, indent=2)
 
 def render_rows_normal(data: Dict[str, Dict[str, str]]) -> str:
-    """Normale Seite: gesamte Karte ist der Link (kein innerer Link)."""
     rows = []
     for model, d in data.items():
         price = d.get("price_chf")
